@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,7 +17,7 @@ public class Manager {
     private String id;
     private String name;
     private String email;
-    private Date dateOfBirth;
+    private LocalDateTime dateOfBirth;
     private String departmentId;
     private List<String> subordinatedEmployeeIds;
 
