@@ -8,6 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public class UpdateManagerDTO {
+    private String id;
     private String name;
     private String dateOfBirth;
     private String departmentId;

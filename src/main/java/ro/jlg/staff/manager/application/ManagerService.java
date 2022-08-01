@@ -42,8 +42,8 @@ public class ManagerService {
         this.managerRepository.addManager(manager);
     }
 
-    public void updateManager(final String managerId, final UpdateManagerDTO updateManagerDTO){
-        final Manager manager = this.managerRepository.getManagerById(managerId);
+    public void updateManager(final UpdateManagerDTO updateManagerDTO){
+        final Manager manager = this.managerRepository.getManagerById(updateManagerDTO.getId());
         manager.update(updateManagerDTO);
         this.managerRepository.addManager(manager);
     }
