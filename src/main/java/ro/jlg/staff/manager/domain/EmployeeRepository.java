@@ -10,4 +10,6 @@ public interface EmployeeRepository {
     void saveEmployee(final Employee employee);
 
     void deleteEmployee(final String id);
+
+    boolean emailExists(final String email);
 }

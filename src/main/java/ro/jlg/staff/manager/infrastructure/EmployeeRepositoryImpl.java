@@ -36,4 +36,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         final Query query = new Query(Criteria.where("_id").is(id));
         this.mongoTemplate.remove(query,Employee.class);
     }
+
+    @Override
+    public boolean emailExists(final String email) {
+        final Query query = new Query(Criteria.where("email").is(email));
+        return this.mongoTemplate.exists(query,Employee.class);
+    }
 }
