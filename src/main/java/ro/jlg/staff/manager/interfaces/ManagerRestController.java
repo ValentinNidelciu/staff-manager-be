@@ -1,20 +1,20 @@
 package ro.jlg.staff.manager.interfaces;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.jlg.staff.manager.application.ManagerService;
 import ro.jlg.staff.manager.application.dto.AddManagerDTO;
+import ro.jlg.staff.manager.application.dto.UpdateManagerDTO;
 import ro.jlg.staff.manager.domain.Manager;
 
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class ManagerRestController {
     private ManagerService managerService;
 
-    public ManagerRestController(final ManagerService managerService) {
-        this.managerService = managerService;
-    }
 
     @GetMapping("/manager")
     public ResponseEntity<List<Manager>> getAllManagers(){
@@ -35,6 +35,12 @@ public class ManagerRestController {
     @PostMapping("/manager")
     public ResponseEntity<Void> addManager(final @RequestBody AddManagerDTO addManagerDTO){
         this.managerService.addManager(addManagerDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/manager/{id}")
+    public ResponseEntity<Void> updateManager(final @PathVariable String managerId, final @RequestBody UpdateManagerDTO updateManagerDTO){
+        this.managerService.updateManager(managerId, updateManagerDTO);
         return ResponseEntity.ok().build();
     }
 

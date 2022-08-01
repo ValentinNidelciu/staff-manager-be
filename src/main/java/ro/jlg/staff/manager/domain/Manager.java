@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import ro.jlg.staff.manager.application.dto.UpdateManagerDTO;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,8 +18,15 @@ public class Manager {
     private String id;
     private String name;
     private String email;
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
     private String departmentId;
     private List<String> subordinatedEmployeeIds;
+
+    public void update(final UpdateManagerDTO updateManagerDTO){
+        this.name = updateManagerDTO.getName();
+        this.dateOfBirth = LocalDate.parse(updateManagerDTO.getDateOfBirth());
+        this.departmentId = updateManagerDTO.getDepartmentId();
+        this.subordinatedEmployeeIds = updateManagerDTO.getSubordinatedEmployeeIds();
+    }
 
 }
