@@ -30,14 +30,22 @@ public class EmployeeService {
     }
 
     public void addEmployee(final AddEmployeeDTO dto){
-        final Employee employee = new Employee(
-                UUID.randomUUID().toString(),
-                dto.getName(),
-                dto.getEmail(),
-                LocalDateTime.parse(dto.getDateOfBirth())
-        );
 
-        this.employeeRepository.saveEmployee(employee);
+        final String email = dto.getEmail();
+
+        if(this.employeeRepository.emailExists(email)){
+            throw new RuntimeException("Email already exists");
+        }
+        else{
+            final Employee employee = new Employee(
+                    UUID.randomUUID().toString(),
+                    dto.getName(),
+                    dto.getEmail(),
+                    LocalDateTime.parse(dto.getDateOfBirth())
+            );
+
+            this.employeeRepository.saveEmployee(employee);
+        }
     }
 
     public void modifyEmployee(final ModifyEmployeeDTO dto){
@@ -48,6 +56,8 @@ public class EmployeeService {
         this.employeeRepository.saveEmployee(employee);
 
     }
+
+
 
 
 }
