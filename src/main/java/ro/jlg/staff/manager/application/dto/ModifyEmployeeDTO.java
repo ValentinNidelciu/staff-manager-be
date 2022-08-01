@@ -5,10 +5,8 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class AddEmployeeDTO {
-    private String name;
+public class ModifyEmployeeDTO {
+    private String id;
     private String email;
     private String dateOfBirth;
-
-
 }

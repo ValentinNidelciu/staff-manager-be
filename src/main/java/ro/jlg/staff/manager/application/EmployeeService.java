@@ -1,7 +1,9 @@
 package ro.jlg.staff.manager.application;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ro.jlg.staff.manager.application.dto.AddEmployeeDTO;
+import ro.jlg.staff.manager.application.dto.ModifyEmployeeDTO;
 import ro.jlg.staff.manager.domain.Employee;
 import ro.jlg.staff.manager.domain.EmployeeRepository;
 
@@ -9,13 +11,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @Service
 public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
 
     public List<Employee> getEmployees(){
         return this.employeeRepository.getAllEmployees();
@@ -39,4 +39,15 @@ public class EmployeeService {
 
         this.employeeRepository.saveEmployee(employee);
     }
+
+    public void modifyEmployee(final ModifyEmployeeDTO dto){
+        final Employee employee = this.employeeRepository.getEmployeeById(dto.getId());
+
+        employee.modify(dto.getEmail(), dto.getDateOfBirth());
+
+        this.employeeRepository.saveEmployee(employee);
+
+    }
+
+
 }

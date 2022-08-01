@@ -17,4 +17,9 @@ public class Employee {
     private String email;
     private LocalDateTime dateOfBirth;
 
+    public void modify(final String email, final String dateOfBirth){
+        this.email = email;
+        this.dateOfBirth = LocalDateTime.parse(dateOfBirth);
+    }
+
 }
