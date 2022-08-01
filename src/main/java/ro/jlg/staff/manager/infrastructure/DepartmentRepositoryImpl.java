@@ -1,5 +1,6 @@
 package ro.jlg.staff.manager.infrastructure;
 
+import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
@@ -10,16 +11,11 @@ import org.springframework.data.mongodb.core.query.Query;
 import java.util.List;
 
 @Repository
+@AllArgsConstructor
 public class DepartmentRepositoryImpl implements DepartmentRepository {
 
     private MongoTemplate mongoTemplate;
 
-    // constructor
-    public DepartmentRepositoryImpl(final MongoTemplate mongoTemplate) {
-        this.mongoTemplate = mongoTemplate;
-    }
-
-    // methods
     @Override
     public Department getDepartmentById(final String id) {
         return this.mongoTemplate.findById(id, Department.class);
@@ -31,12 +27,12 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
     }
 
     @Override
-    public Department saveDepartment(Department department) {
+    public Department saveDepartment(final Department department) {
         return this.mongoTemplate.save(department);
     }
 
     @Override
-    public void deleteDepartment(String id) {
+    public void deleteDepartment(final String id) {
         final Query query = new Query(Criteria.where("_id").is(id));
         this.mongoTemplate.remove(query, Department.class);
     }

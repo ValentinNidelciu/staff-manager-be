@@ -1,6 +1,6 @@
 package ro.jlg.staff.manager.interfaces;
 
-import org.apache.catalina.connector.Response;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.jlg.staff.manager.application.DepartmentService;
@@ -12,15 +12,10 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@AllArgsConstructor
 public class DepartmentRestController {
     private DepartmentService departmentService;
 
-    // constructor
-    public DepartmentRestController(final DepartmentService departmentService) {
-        this.departmentService = departmentService;
-    }
-
-    // endpoints
     @GetMapping("department")
     public ResponseEntity<List<Department>> getAllDepartments() {
         return ResponseEntity.ok(this.departmentService.getAllDepartments());

@@ -1,5 +1,7 @@
 package ro.jlg.staff.manager.application;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 import ro.jlg.staff.manager.application.dto.AddDepartmentDTO;
 import ro.jlg.staff.manager.application.dto.ModifyDepartmentDTO;
@@ -10,24 +12,18 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
+@Getter
 public class DepartmentService {
 
     private DepartmentRepository departmentRepository;
 
-    // constructor
-    public DepartmentService(final DepartmentRepository departmentRepository) {
-        this.departmentRepository = departmentRepository;
-    }
-
-    // methods
     public Department getDepartmentById(final String id) {
         return this.departmentRepository.getDepartmentById(id);
     }
-
     public List<Department> getAllDepartments() {
         return this.departmentRepository.getAllDepartments();
     }
-
     public Department addDepartment (final AddDepartmentDTO addDepartmentDTO) {
         final Department department = new Department(
                 UUID.randomUUID().toString(),
@@ -37,7 +33,6 @@ public class DepartmentService {
         );
         return this.departmentRepository.saveDepartment(department);
     }
-
     public void modifyDepartment(final ModifyDepartmentDTO modifyDepartmentDTO) {
         final Department department = this.departmentRepository
                 .getDepartmentById(modifyDepartmentDTO.getId());
@@ -47,7 +42,6 @@ public class DepartmentService {
                 modifyDepartmentDTO.getMaxEmployees()
         );
     }
-
     public void deleteDepartment(final String id) {
         this.departmentRepository.deleteDepartment(id);
     }
