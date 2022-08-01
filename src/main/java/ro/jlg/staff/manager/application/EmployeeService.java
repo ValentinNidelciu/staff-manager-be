@@ -33,7 +33,7 @@ public class EmployeeService {
 
         final String email = dto.getEmail();
 
-        if( employeeRepository.emailExists(email)){
+        if(employeeRepository.emailExists(email)){
             throw new RuntimeException("Email already exists");
         }
         else{
