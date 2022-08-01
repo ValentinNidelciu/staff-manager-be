@@ -8,7 +8,6 @@ import ro.jlg.staff.manager.domain.Manager;
 import ro.jlg.staff.manager.domain.ManagerRepository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +29,8 @@ public class ManagerService {
     }
 
     public void addManager(final AddManagerDTO addManagerDTO) {
+        this.checkUniqueEmail(addManagerDTO.getEmail());
+
         final Manager manager = new Manager(
                 UUID.randomUUID().toString(),
                 addManagerDTO.getName(),
@@ -38,11 +39,19 @@ public class ManagerService {
                 addManagerDTO.getDepartmentId(),
                 addManagerDTO.getSubordinatedEmployeeIds()
         );
+        this.managerRepository.addManager(manager);
     }
 
     public void updateManager(final String managerId, final UpdateManagerDTO updateManagerDTO){
         final Manager manager = this.managerRepository.getManagerById(managerId);
         manager.update(updateManagerDTO);
         this.managerRepository.addManager(manager);
+    }
+    private void checkUniqueEmail(final String email) {
+        if (this.managerRepository.managerEmailExists(email)){
+            final String errorMessage = String.format("A manager with email %s already exists", email);
+            throw new RuntimeException(errorMessage);
+        }
+
     }
 }

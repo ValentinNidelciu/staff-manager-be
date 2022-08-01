@@ -11,4 +11,6 @@ public interface ManagerRepository {
     Manager getManagerById(final String managerId);
 
     void deleteManager(final String managerId);
+
+    boolean managerEmailExists(final String email);
 }
