@@ -35,4 +35,12 @@ public class ManagerRepositoryImpl implements ManagerRepository{
         final Query query = new Query(Criteria.where("_id").is(managerId));
         this.mongoTemplate.remove(query, Manager.class);
     }
+
+    @Override
+    public boolean managerEmailExists(final String email) {
+        final Query query = new Query(Criteria.where("email").is(email));
+        final Manager manager = this.mongoTemplate.findOne(query, Manager.class);
+
+        return manager != null ;
+    }
 }

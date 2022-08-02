@@ -39,8 +39,8 @@ public class ManagerRestController {
     }
 
     @PatchMapping("/manager/{id}")
-    public ResponseEntity<Void> updateManager(final @PathVariable String managerId, final @RequestBody UpdateManagerDTO updateManagerDTO){
-        this.managerService.updateManager(managerId, updateManagerDTO);
+    public ResponseEntity<Void> updateManager(final @RequestBody UpdateManagerDTO updateManagerDTO){
+        this.managerService.updateManager(updateManagerDTO);
         return ResponseEntity.ok().build();
     }
 
